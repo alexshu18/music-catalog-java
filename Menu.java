@@ -1,8 +1,9 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class Menu {
     public static int menu() {
-        int select;
+        int select = 0;
 
         Scanner input = new Scanner(System.in);
         System.out.println("Select your option: ");
@@ -12,7 +13,16 @@ public class Menu {
         System.out.println("4 - sort");
         System.out.println("5 - quit");
 
-        select = input.nextInt();
+        while (select < 1 || select > 5) {
+            System.out.println("Enter the number 1-5");
+            try {
+                select = input.nextInt();
+                input.nextLine();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid number");
+                input.nextLine();
+            }
+        }
         return select;
     }
 }
